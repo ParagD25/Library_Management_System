@@ -17,7 +17,30 @@ def search_cmd():
     for data in button.search_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()):
         lst.insert(END,data)
 
+def delete_cmd():
+    button.delete_record(selection[0])
+
+def update_cmd():
+    button.update_record(selection[0],title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
+
+def get_selected_row(event):
+    try:
+        global selection
+        index=lst.curselection()[0]
+        selection=lst.get(index)
+        entry1.delete(0,END)
+        entry1.insert(END,selection[1])
+        entry2.delete(0,END)
+        entry2.insert(END,selection[2])
+        entry3.delete(0,END)
+        entry3.insert(END,selection[3])
+        entry4.delete(0,END)
+        entry4.insert(END,selection[4])
+    except IndexError:
+        pass
 gui_window=tk.Tk()
+
+gui_window.title('Library Management System')
 
 gui_window.geometry("380x250")
 
@@ -58,13 +81,13 @@ button2.grid(row=3,column=3)
 button3=tk.Button(gui_window,text='Search a Book',width=12,activebackground='SkyBlue',command=search_cmd)
 button3.grid(row=4,column=1)
 
-button4=tk.Button(gui_window,text='Update a Book',width=12,activebackground='MediumPurple1')
+button4=tk.Button(gui_window,text='Update a Book',width=12,activebackground='MediumPurple1',command=update_cmd)
 button4.grid(row=4,column=3)
 
-button5=tk.Button(gui_window,text='Delete Book',width=12,activebackground='dark orange')
+button5=tk.Button(gui_window,text='Delete Book',width=12,activebackground='dark orange',command=delete_cmd)
 button5.grid(row=5,column=1)
 
-button6=tk.Button(gui_window,text='Close',width=12,activebackground='firebrick1')
+button6=tk.Button(gui_window,text='Close',width=12,activebackground='firebrick1',command=gui_window.destroy)
 button6.grid(row=5,column=3)
 
 scroll=tk.Scrollbar(gui_window)
@@ -75,5 +98,7 @@ lst.grid(row=6,column=0,rowspan=6,columnspan=4)
 
 lst.config(yscrollcommand=scroll.set)
 scroll.config(command=lst.yview)
+
+lst.bind('<<ListboxSelect>>',get_selected_row)
 
 gui_window.mainloop()
