@@ -2,7 +2,7 @@ import sqlite3
 def connect_to_database():
     conn=sqlite3.connect('lib_books.db')
     cur=conn.cursor()
-    cur.execute('create table if not exists book (id INTEGER PRIMARY KEY,title TEXT,author TEXT,year INTEGER,isbn INTEGER UNIQUE)')
+    cur.execute('create table if not exists book (id INTEGER PRIMARY KEY,title TEXT,author TEXT,year INTEGER,isbn INTEGER)')
     conn.commit()
     conn.close() 
 

@@ -1,4 +1,21 @@
 import tkinter as tk
+from tkinter.constants import END, VERTICAL
+import button 
+
+def view_cmd():
+    lst.delete(0,END)
+    for data in button.view_data():
+        lst.insert(END,data)
+
+def add_cmd():
+    button.insert_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
+    lst.delete(0,END)
+    lst.insert(END,(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()))
+
+def search_cmd():
+    lst.delete(0,END)
+    for data in button.search_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()):
+        lst.insert(END,data)
 
 gui_window=tk.Tk()
 
@@ -32,13 +49,13 @@ isbn_val=tk.StringVar()
 entry4=tk.Entry(gui_window,textvariable=isbn_val)
 entry4.grid(row=1,column=3)
 
-button1=tk.Button(gui_window,text='Veiw All Books',width=12,activebackground='khaki2',activeforeground='red')
+button1=tk.Button(gui_window,text='Veiw All Books',width=12,activebackground='khaki2',activeforeground='red',command=view_cmd)
 button1.grid(row=3,column=1)
 
-button2=tk.Button(gui_window,text='Add Book',width=12,activebackground='pale green')
+button2=tk.Button(gui_window,text='Add Book',width=12,activebackground='pale green',command=add_cmd)
 button2.grid(row=3,column=3)
 
-button3=tk.Button(gui_window,text='Search a Book',width=12,activebackground='SkyBlue')
+button3=tk.Button(gui_window,text='Search a Book',width=12,activebackground='SkyBlue',command=search_cmd)
 button3.grid(row=4,column=1)
 
 button4=tk.Button(gui_window,text='Update a Book',width=12,activebackground='MediumPurple1')
