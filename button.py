@@ -36,7 +36,7 @@ def update_record(id,title,author,year,isbn):
     conn.commit()
     conn.close() 
 
-def delect_record(id):
+def delete_record(id):
     conn=sqlite3.connect('lib_books.db')
     cur=conn.cursor()
     cur.execute('delete from book where id=?',(id,))
