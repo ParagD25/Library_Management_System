@@ -44,6 +44,9 @@ gui_window.title('Library Management System')
 
 gui_window.geometry("380x250")
 
+icon=tk.PhotoImage(file='images/icon.png')
+gui_window.iconphoto(False,icon)
+
 label1=tk.Label(gui_window,text='Title')
 label1.grid(row=0,column=0)
 
