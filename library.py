@@ -1,27 +1,27 @@
 import tkinter as tk
 from tkinter.constants import END, VERTICAL
-import button 
-
+from button import Data
+mydata=Data()
 def view_cmd():
     lst.delete(0,END)
-    for data in button.view_data():
+    for data in mydata.view_data():
         lst.insert(END,data)
 
 def add_cmd():
-    button.insert_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
+    mydata.insert_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
     lst.delete(0,END)
     lst.insert(END,(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()))
 
 def search_cmd():
     lst.delete(0,END)
-    for data in button.search_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()):
+    for data in mydata.search_in_database(title_val.get(),author_val.get(),year_val.get(),isbn_val.get()):
         lst.insert(END,data)
 
 def delete_cmd():
-    button.delete_record(selection[0])
+    mydata.delete_record(selection[0])
 
 def update_cmd():
-    button.update_record(selection[0],title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
+    mydata.update_record(selection[0],title_val.get(),author_val.get(),year_val.get(),isbn_val.get())
 
 def get_selected_row(event):
     try:
